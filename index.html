@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07111b">
+  <meta name="description" content="SanchezSound Digital Jukebox">
+  <title>SanchezSound · Digital Jukebox</title>
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./"><img src="./assets/logo.svg" alt="SanchezSound"></a>
+      <nav class="desktop-nav" aria-label="Navegación principal">
+        <button data-nav="home">Inicio</button>
+        <button data-nav="artists">Artistas</button>
+        <button data-nav="genres">Géneros</button>
+        <button data-nav="honduras">Top Honduras</button>
+        <button data-nav="queue">Fila</button>
+      </nav>
+      <div class="top-actions">
+        <span id="modeBadge" class="mode-badge">Cargando…</span>
+        <button id="openSearchBtn" class="icon-btn" aria-label="Buscar">⌕</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="homeView" class="view">
+        <div class="jukebox-stage">
+          <div class="jukebox-frame">
+            <div class="neon-arch neon-left"></div>
+            <div class="neon-arch neon-right"></div>
+            <div class="screen-bezel">
+              <div class="screen-header">
+                <div>
+                  <span class="eyebrow">SANCHEZSOUND</span>
+                  <h1>Digital Jukebox</h1>
+                </div>
+                <div id="homeRoomChip" class="room-chip hidden"></div>
+              </div>
+              <div class="hero-grid">
+                <button class="hero-tile tile-honduras" data-nav="honduras">
+                  <span>🇭🇳</span><strong>Top Honduras</strong><small>Lo que más suena</small>
+                </button>
+                <button class="hero-tile" data-nav="artists"><span>🎤</span><strong>Artistas</strong><small>Explora por artista</small></button>
+                <button class="hero-tile" data-nav="genres"><span>🎼</span><strong>Géneros</strong><small>Encuentra tu estilo</small></button>
+                <button class="hero-tile" id="heroSearchBtn"><span>🔎</span><strong>Buscar</strong><small>Canción o artista</small></button>
+              </div>
+              <section class="featured-block">
+                <div class="section-heading"><div><span class="eyebrow">RECOMENDADOS</span><h2>Para empezar</h2></div><button class="text-btn" data-nav="popular">Ver todos</button></div>
+                <div id="featuredSongs" class="cover-grid"></div>
+              </section>
+            </div>
+            <div class="jukebox-lower">
+              <div class="speaker-grid"></div>
+              <div class="center-emblem">SS</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="catalogView" class="view hidden">
+        <div class="page-head">
+          <button class="back-btn" data-nav="home">← Inicio</button>
+          <div><span id="catalogEyebrow" class="eyebrow">CATÁLOGO</span><h2 id="catalogTitle">Música</h2><p id="catalogSubtitle"></p></div>
+        </div>
+        <div id="catalogBody"></div>
+      </section>
+
+      <section id="searchView" class="view hidden">
+        <div class="page-head">
+          <button class="back-btn" data-nav="home">← Inicio</button>
+          <div><span class="eyebrow">BUSCAR</span><h2>Encuentra tu canción</h2><p>Busca por título o artista. Si no está guardada en el catálogo, SanchezSound puede buscarla en YouTube.</p></div>
+        </div>
+        <form id="searchForm" class="search-box">
+          <input id="searchInput" type="search" required autocomplete="off" placeholder="Ej. Bad Bunny, bachata, Luis Miguel…">
+          <button class="primary-btn" type="submit">Buscar</button>
+        </form>
+        <div id="searchStatus" class="status-line"></div>
+        <div id="searchResults" class="song-list"></div>
+      </section>
+
+      <section id="queueView" class="view hidden">
+        <div class="page-head">
+          <button class="back-btn" data-nav="home">← Inicio</button>
+          <div><span class="eyebrow">REPRODUCCIÓN</span><h2>Fila de canciones</h2><p>Las solicitudes se reproducen en el orden indicado por la rokola.</p></div>
+        </div>
+        <div class="queue-layout">
+          <div class="now-card">
+            <span class="eyebrow">SONANDO AHORA</span>
+            <div id="nowCover" class="now-cover">♪</div>
+            <h3 id="nowTitle">Nada reproduciéndose</h3>
+            <p id="nowArtist">Agrega una canción para comenzar.</p>
+            <div class="progress"><div id="playerProgress"></div></div>
+            <div class="time-row"><span id="elapsedTime">0:00</span><span id="durationTime">0:00</span></div>
+            <div id="hostControls" class="host-controls hidden">
+              <button id="playPauseBtn" class="round-control">▶</button>
+              <button id="skipBtn" class="round-control">⏭</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="section-heading"><div><span class="eyebrow">PRÓXIMAS</span><h2>En espera</h2></div><span id="queueCount" class="count-chip">0</span></div>
+            <div id="queueList" class="queue-list empty">No hay canciones en la fila.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="roomView" class="view hidden">
+        <div class="room-landing">
+          <img src="./assets/logo.svg" alt="SanchezSound" class="room-logo">
+          <div class="room-choice">
+            <article class="panel">
+              <span class="eyebrow">ADMINISTRADOR</span><h2>Crear una rokola</h2><p>Abre una sala para que tus invitados pidan canciones desde sus teléfonos.</p>
+              <button id="createRoomBtn" class="primary-btn full">Crear sala</button>
+            </article>
+            <article class="panel">
+              <span class="eyebrow">INVITADO</span><h2>Entrar con código</h2><p>Escribe el código que aparece en la pantalla principal.</p>
+              <form id="joinRoomForm" class="stack-form"><input id="roomCodeInput" maxlength="6" placeholder="ABC123" autocomplete="off"><button class="secondary-btn full">Entrar</button></form>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="hostView" class="view hidden">
+        <div class="host-header">
+          <div><span class="eyebrow">SALA ACTIVA</span><h2 id="hostRoomName">SanchezSound</h2></div>
+          <a id="adminLink" class="secondary-btn" href="#">Administrar</a>
+        </div>
+        <div class="host-grid">
+          <div class="panel invite-panel">
+            <span class="eyebrow">CÓDIGO</span><div id="hostRoomCode" class="mega-code">------</div>
+            <div id="qrCode" class="qr-box"></div>
+            <button id="copyInviteBtn" class="secondary-btn full">Copiar enlace para invitados</button>
+          </div>
+          <div class="panel host-now-panel">
+            <span class="eyebrow">PANTALLA PRINCIPAL</span><h2>La música se controla aquí</h2><p>Mantén esta pantalla abierta en la computadora conectada a las bocinas.</p>
+            <button class="primary-btn full" data-nav="queue">Abrir reproductor / fila</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="adminView" class="view hidden">
+        <div class="page-head admin-page-head">
+          <a id="backToHostLink" class="back-btn" href="#">← Volver a la rokola</a>
+          <div><span class="eyebrow">ADMIN</span><h2>Control SanchezSound</h2><p>Configuración, solicitudes y catálogo.</p></div>
+        </div>
+        <div class="admin-grid">
+          <section class="panel settings-panel">
+            <span class="eyebrow">SALA</span><h3>Configuración</h3>
+            <label>Nombre de la sala<input id="roomNameSetting" maxlength="60"></label>
+            <label>Máximo de solicitudes por persona<select id="maxRequestsSetting"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="0">Ilimitadas</option></select></label>
+            <label class="switch-row"><span>Aprobación manual</span><input id="approvalSetting" type="checkbox"></label>
+            <label class="switch-row"><span>Bloquear duplicados</span><input id="duplicateSetting" type="checkbox"></label>
+            <label class="switch-row"><span>Aceptar solicitudes</span><input id="requestsOpenSetting" type="checkbox"></label>
+            <button id="saveSettingsBtn" class="primary-btn full">Guardar</button>
+          </section>
+          <section class="panel admin-requests-panel">
+            <div class="section-heading"><div><span class="eyebrow">SOLICITUDES</span><h3>Fila y aprobación</h3></div></div>
+            <div id="adminQueue" class="queue-list empty">No hay solicitudes.</div>
+          </section>
+          <section class="panel history-panel">
+            <div class="section-heading"><div><span class="eyebrow">HISTORIAL</span><h3>Últimas reproducidas</h3></div></div>
+            <div id="historyList" class="queue-list empty">Todavía no hay historial.</div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div id="requestDrawer" class="drawer hidden" aria-hidden="true">
+      <div class="drawer-backdrop" data-close-drawer></div>
+      <div class="drawer-card">
+        <button class="drawer-close" data-close-drawer aria-label="Cerrar">×</button>
+        <div id="drawerCover" class="drawer-cover"></div>
+        <span class="eyebrow">PEDIR CANCIÓN</span><h2 id="drawerTitle"></h2><p id="drawerArtist"></p>
+        <label>Tu nombre (opcional)<input id="requesterName" maxlength="30" placeholder="Ej. Wilmer"></label>
+        <button id="confirmRequestBtn" class="primary-btn full">Agregar a la fila</button>
+        <div id="drawerStatus" class="status-line"></div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <div id="youtubePlayer" class="youtube-player" aria-hidden="true"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
