@@ -1,3 +1,5 @@
+import "./control.js";
+
 const params = new URLSearchParams(location.search);
 const initialView = params.get('view') || 'public';
 const interfaceType = initialView === 'admin' ? 'admin' : initialView === 'host' ? 'host' : initialView === 'guest' ? 'guest' : 'public';
