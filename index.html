@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#07111b">
+  <meta name="theme-color" content="#030711">
   <meta name="description" content="SanchezSound Digital Jukebox">
   <title>SanchezSound · Digital Jukebox</title>
   <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./neon.css">
 </head>
 <body>
   <div class="app-shell">
@@ -128,18 +129,18 @@
 
       <section id="hostView" class="view hidden">
         <div class="host-header">
-          <div><span class="eyebrow">SALA ACTIVA</span><h2 id="hostRoomName">SanchezSound</h2></div>
-          <a id="adminLink" class="secondary-btn" href="#">Administrar</a>
+          <div><span class="eyebrow">PANTALLA DE ROKOLA</span><h2 id="hostRoomName">SanchezSound</h2></div>
+          <a id="adminLink" class="secondary-btn" href="#">Panel administrador</a>
         </div>
         <div class="host-grid">
           <div class="panel invite-panel">
-            <span class="eyebrow">CÓDIGO</span><div id="hostRoomCode" class="mega-code">------</div>
+            <span class="eyebrow">INVITA DESDE EL CELULAR</span><div id="hostRoomCode" class="mega-code">------</div>
             <div id="qrCode" class="qr-box"></div>
             <button id="copyInviteBtn" class="secondary-btn full">Copiar enlace para invitados</button>
           </div>
           <div class="panel host-now-panel">
-            <span class="eyebrow">PANTALLA PRINCIPAL</span><h2>La música se controla aquí</h2><p>Mantén esta pantalla abierta en la computadora conectada a las bocinas.</p>
-            <button class="primary-btn full" data-nav="queue">Abrir reproductor / fila</button>
+            <span class="eyebrow">REPRODUCTOR PRINCIPAL</span><h2>Esta es la pantalla que queda en la PC</h2><p>Conecta la computadora a las bocinas. Los invitados usan el QR para pedir canciones y tú mantienes el control desde el panel administrador.</p>
+            <button class="primary-btn full" data-nav="queue">Abrir reproductor y fila</button>
           </div>
         </div>
       </section>
@@ -147,7 +148,7 @@
       <section id="adminView" class="view hidden">
         <div class="page-head admin-page-head">
           <a id="backToHostLink" class="back-btn" href="#">← Volver a la rokola</a>
-          <div><span class="eyebrow">ADMIN</span><h2>Control SanchezSound</h2><p>Configuración, solicitudes y catálogo.</p></div>
+          <div><span class="eyebrow">ADMINISTRADOR</span><h2>Control SanchezSound</h2><p>Gestiona la sala, solicitudes, reproducción e historial sin mezclar los controles con la experiencia del invitado.</p></div>
         </div>
         <div class="admin-grid">
           <section class="panel settings-panel">
@@ -157,7 +158,7 @@
             <label class="switch-row"><span>Aprobación manual</span><input id="approvalSetting" type="checkbox"></label>
             <label class="switch-row"><span>Bloquear duplicados</span><input id="duplicateSetting" type="checkbox"></label>
             <label class="switch-row"><span>Aceptar solicitudes</span><input id="requestsOpenSetting" type="checkbox"></label>
-            <button id="saveSettingsBtn" class="primary-btn full">Guardar</button>
+            <button id="saveSettingsBtn" class="primary-btn full">Guardar configuración</button>
           </section>
           <section class="panel admin-requests-panel">
             <div class="section-heading"><div><span class="eyebrow">SOLICITUDES</span><h3>Fila y aprobación</h3></div></div>
@@ -183,12 +184,21 @@
       </div>
     </div>
 
+    <nav id="mobileDock" class="mobile-dock" aria-label="Navegación móvil">
+      <button data-nav="home" class="active"><span class="dock-icon">⌂</span><span>Inicio</span></button>
+      <button data-nav="artists"><span class="dock-icon">🎤</span><span>Artistas</span></button>
+      <button data-nav="search"><span class="dock-icon">⌕</span><span>Buscar</span></button>
+      <button data-nav="honduras"><span class="dock-icon">🇭🇳</span><span>Top</span></button>
+      <button data-nav="queue"><span class="dock-icon">☷</span><span>Fila</span></button>
+    </nav>
+
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <div id="youtubePlayer" class="youtube-player" aria-hidden="true"></div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
+  <script type="module" src="./js/ui.js"></script>
   <script type="module" src="./js/app.js"></script>
 </body>
 </html>
