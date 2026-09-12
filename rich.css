@@ -1,0 +1,40 @@
+/* Rich catalog layer: Top Honduras, artist photos and touch-first shelves */
+.home-shelf{margin-top:30px;padding-top:24px;border-top:1px solid rgba(74,209,255,.14)}
+.home-shelf .shelf-copy{color:#8fa8bd;font-size:.85rem;margin:.25rem 0 0}
+.rich-cover-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:13px}
+.rich-song-card{position:relative;min-width:0;border:1px solid rgba(74,209,255,.22);border-radius:18px;background:linear-gradient(145deg,rgba(13,31,50,.94),rgba(5,12,23,.98));padding:9px;color:#fff;text-align:left;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.04),0 12px 28px rgba(0,0,0,.18);transition:.18s ease}
+.rich-song-card:hover,.rich-song-card:focus-visible{transform:translateY(-3px);border-color:rgba(33,230,255,.7);box-shadow:0 0 24px rgba(33,230,255,.14),0 16px 32px rgba(0,0,0,.28);outline:none}
+.rich-song-art{position:relative;aspect-ratio:1;border-radius:13px;background:radial-gradient(circle at 30% 20%,rgba(33,230,255,.28),transparent 36%),linear-gradient(145deg,#102942,#09111e);background-size:cover;background-position:center;overflow:hidden;display:grid;place-items:center;color:#59ddff;font-size:2.5rem}
+.rich-rank{position:absolute;top:8px;left:8px;z-index:2;min-width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:rgba(2,7,14,.88);border:1px solid rgba(33,230,255,.42);font:800 1.05rem 'Barlow Condensed';color:#7cecff;box-shadow:0 0 16px rgba(33,230,255,.16)}
+.rich-song-card strong,.rich-song-card span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rich-song-card strong{font-size:.88rem;margin:9px 2px 0}.rich-song-card span{font-size:.73rem;color:#8fa8bd;margin:3px 2px 1px}
+.artist-strip{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:14px}
+.artist-orb-card{border:0;background:transparent;color:#fff;padding:0;cursor:pointer;text-align:center;min-width:0}
+.artist-orb{width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 20%,rgba(255,63,210,.22),transparent 36%),linear-gradient(145deg,#122c48,#0a1321);background-size:cover;background-position:center;border:2px solid rgba(33,230,255,.28);box-shadow:0 0 0 5px rgba(33,230,255,.035),0 12px 26px rgba(0,0,0,.25);display:grid;place-items:center;font:800 1.5rem 'Barlow Condensed';transition:.18s ease;overflow:hidden}
+.artist-orb-card:hover .artist-orb,.artist-orb-card:focus-visible .artist-orb{transform:scale(1.035);border-color:#21e6ff;box-shadow:0 0 24px rgba(33,230,255,.18)}
+.artist-orb-card strong{display:block;font-size:.78rem;margin-top:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chart-source{display:inline-flex;align-items:center;gap:7px;margin-top:6px;padding:5px 9px;border-radius:999px;border:1px solid rgba(88,247,173,.22);background:rgba(88,247,173,.06);color:#9ff8c9;font-size:.68rem;font-weight:800;letter-spacing:.04em}
+.art-loading{position:relative}.art-loading::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.08) 45%,transparent 70%);transform:translateX(-100%);animation:ss-shimmer 1.3s infinite}@keyframes ss-shimmer{to{transform:translateX(100%)}}
+
+/* Make existing catalog artwork feel more like a commercial touchscreen jukebox */
+.cover-card,.entity-card,.song-row{box-shadow:0 12px 30px rgba(0,0,0,.16)}
+.cover-card{padding:10px;border-radius:18px}.cover-art{border-radius:14px}.entity-image{background-size:cover!important;background-position:center!important}
+.entity-card:hover,.cover-card:hover{box-shadow:0 0 24px rgba(33,230,255,.12),0 14px 30px rgba(0,0,0,.24)}
+.song-row .primary-btn{min-width:148px}
+
+/* Admin is deliberately visually distinct from guest mode */
+body[data-interface="admin"]{background:radial-gradient(circle at 80% -5%,rgba(255,63,210,.14),transparent 28rem),radial-gradient(circle at 10% 15%,rgba(123,92,255,.16),transparent 30rem),linear-gradient(180deg,#060511,#070812 70%,#03050a)}
+body[data-interface="admin"] .topbar{border-bottom-color:rgba(255,63,210,.2)}
+body[data-interface="admin"] .eyebrow{color:#ff77df}
+body[data-interface="admin"] .panel{border-color:rgba(166,92,255,.24)}
+body[data-interface="guest"] .primary-btn{box-shadow:0 0 22px rgba(33,230,255,.24)}
+
+@media(max-width:1100px){.rich-cover-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.artist-strip{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media(max-width:700px){
+  .home-shelf{margin-top:22px;padding-top:20px}
+  .rich-cover-grid,.artist-strip{display:flex;overflow-x:auto;gap:11px;padding:3px 3px 12px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .rich-cover-grid::-webkit-scrollbar,.artist-strip::-webkit-scrollbar{display:none}
+  .rich-song-card{flex:0 0 47%;scroll-snap-align:start;min-height:210px}
+  .artist-orb-card{flex:0 0 30%;scroll-snap-align:start}
+  .song-row .primary-btn{min-height:56px;font-size:1rem}
+}
+@media(max-width:420px){.rich-song-card{flex-basis:58%}.artist-orb-card{flex-basis:36%}}
