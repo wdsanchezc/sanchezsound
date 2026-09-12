@@ -3,6 +3,15 @@ const initialView = params.get('view') || 'public';
 const interfaceType = initialView === 'admin' ? 'admin' : initialView === 'host' ? 'host' : initialView === 'guest' ? 'guest' : 'public';
 document.body.dataset.interface = interfaceType;
 
+// Load the richer catalog/touch styling without coupling it to the core player.
+if (!document.querySelector('link[data-ss-rich]')) {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = './rich.css';
+  link.dataset.ssRich = '1';
+  document.head.appendChild(link);
+}
+
 const dock = document.getElementById('mobileDock');
 if (dock) {
   const viewToNav = {
@@ -31,3 +40,5 @@ if (mode) {
   observer.observe(mode,{childList:true,subtree:true});
   setTimeout(() => { if (!mode.textContent.includes('·') && suffix) mode.textContent += suffix; }, 300);
 }
+
+import('./catalog-rich.js').catch(() => {});
