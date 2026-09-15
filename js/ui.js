@@ -47,3 +47,4 @@ if (mode) {
 
 import('./catalog-rich.js').catch(() => {});
 import('./experience-v2.js').catch(err => console.error('SanchezSound experience:', err));
+import('./premium-player.js').catch(err => console.error('SanchezSound Premium player:', err));
