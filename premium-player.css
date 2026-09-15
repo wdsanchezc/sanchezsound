@@ -1,0 +1,7 @@
+.ss2-premium-wrap{margin-top:18px;border:1px solid rgba(66,224,255,.24);border-radius:18px;background:linear-gradient(145deg,rgba(7,18,31,.96),rgba(5,9,18,.98));padding:14px;box-shadow:inset 0 1px rgba(255,255,255,.04),0 16px 34px rgba(0,0,0,.24)}
+.ss2-premium-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}.ss2-premium-head strong{display:block;margin-top:4px;font-size:1rem}.ss2-premium-badge{font-size:.68rem;font-weight:800;letter-spacing:.05em;color:#b7ffd6;border:1px solid rgba(91,248,173,.25);background:rgba(91,248,173,.08);padding:7px 10px;border-radius:999px;text-align:center}
+.ss2-premium-slot{position:relative;width:100%;aspect-ratio:16/9;min-height:220px;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 0 28px rgba(0,190,255,.12)}
+.ss2-premium-youtube{display:block!important;position:static!important;width:100%!important;height:100%!important;min-height:220px!important;opacity:1!important;pointer-events:auto!important;border:0!important}
+.ss2-premium-help{margin:10px 2px 0;color:#91a8bb;font-size:.78rem;line-height:1.55}.ss2-premium-help b{color:#cfefff}
+@media(min-width:1100px){.ss2-player-card .ss2-now{grid-template-columns:170px 1fr}.ss2-premium-slot{min-height:300px}}
+@media(max-width:680px){.ss2-premium-head{align-items:flex-start;flex-direction:column}.ss2-premium-badge{width:100%}.ss2-premium-slot,.ss2-premium-youtube{min-height:190px!important}}
